@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 
 const data = [
-  'test',
   {
     _id: "5e985a07feddae7617ac44f6",
     age: 24,
@@ -156,7 +155,7 @@ export class FilterWithComponent {
   data = data;
   resultOfFilterWith: DataInterface[];
 
-filterWith(arr: any | DataInterface['tags'] | DataInterface['friends'], phrase: string): DataInterface[] {
+filterWith(arr: any[], phrase: string): DataInterface[] {
   let result: DataInterface[] = [];
 
   if (phrase.length < 3) {
@@ -164,7 +163,7 @@ filterWith(arr: any | DataInterface['tags'] | DataInterface['friends'], phrase: 
     return result;
   }
 
-  arr.forEach((rootObj) => {
+  arr.forEach((rootObj) => { //filter((arr) => {recursiveSearch(arr)})
     Object.keys(rootObj).forEach((rootObjKey) => {
       if (Array.isArray(rootObj[rootObjKey])) {
           const nestedArr = this.filterWith(rootObj[rootObjKey], phrase)
@@ -181,5 +180,8 @@ filterWith(arr: any | DataInterface['tags'] | DataInterface['friends'], phrase: 
   this.resultOfFilterWith = result;
   return result;
 }
+
+//1. zrobić metodę recursiveSearch, iteruje po typie: obiekt, array, else string
+//2. programowanie funkcyjne - poszukać
 
 }
