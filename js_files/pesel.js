@@ -1,6 +1,6 @@
 
   const generatePesel = (userDate, gender) => {
-  const date = new Date(userDate);
+    const date = new Date(userDate);
     if (typeof date.getMonth !== 'function') {
       console.log('Podana data nie jest poprawna');
       return;

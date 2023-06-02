@@ -1,5 +1,3 @@
-import { Component } from '@angular/core';
-
 const data = [
   {
     _id: "5e985a07feddae7617ac44f6",
@@ -145,19 +143,7 @@ const data = [
   },
 ];
 
-@Component({
-  selector: 'filter-with',
-  templateUrl: './filter-with.component.html',
-  styleUrls: ['./filter-with.component.scss']
-})
-export class FilterWithComponent {
-
-  phrase: string;
-  data = data;
-  resultOfFilterWith;
-
-filterWith(mainDataArr, phrase) {
-  let result = [];
+const filterWith = function(mainDataArr, phrase) {
   if (phrase.length < 3) {
     this.resultOfFilterWith = result;
     return result;
@@ -190,15 +176,10 @@ filterWith(mainDataArr, phrase) {
     }
   }
 
-  result = mainDataArr.filter((dataOfArray) => {
-    const y = recursiveSearch(dataOfArray, phrase);
-    return y && y.length;
+  return mainDataArr.filter((dataOfArray) => {
+    const result = recursiveSearch(dataOfArray, phrase);
+    return result && result.length;
   });
-  this.resultOfFilterWith = result;
-  return result;
 }
 
-//1. zrobić metodę recursiveSearch, iteruje po typie: obiekt, array, else string
-//2. programowanie funkcyjne - poszukać
-
-}
+  console.log(filterWith(data, 'nisi'));
