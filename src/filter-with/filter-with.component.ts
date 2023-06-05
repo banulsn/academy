@@ -156,49 +156,38 @@ export class FilterWithComponent {
   data = data;
   resultOfFilterWith;
 
-filterWith(mainDataArr, phrase) {
-  let result = [];
-  if (phrase.length < 3) {
+  filterWith(mainDataArr, phrase) {
+    let result = [];
+    if (phrase.length < 3) {
+      this.resultOfFilterWith = [];
+      return;
+    }
+
+    const phrasePattern = new RegExp(phrase);
+
+    const recursiveSearch = (dataToSearch, phrase) => {
+      switch (Object.prototype.toString.call(dataToSearch)) {
+        case ('[object Array]'):
+          return dataToSearch.filter((dataToSearchValue) => {
+            return recursiveSearch(dataToSearchValue, phrase);
+        }).length;
+
+        case ('[object Object]'):
+          return Object.values(dataToSearch).filter((dataToSearchObjectValue) => {
+            return recursiveSearch(dataToSearchObjectValue, phrase);
+          }).length;
+
+        default:
+          return phrasePattern.test(dataToSearch);
+      }
+    }
+
+    result = mainDataArr.filter((dataOfArray) => {
+      const result = recursiveSearch(dataOfArray, phrase);
+      return result;
+    });
     this.resultOfFilterWith = result;
     return result;
   }
-
-  const recursiveSearch = (dataToSearch, phrase) => {
-    if (Array.isArray(dataToSearch)) {
-      return dataToSearch.filter((dataToSearchValue) => {
-      if (typeof dataToSearchValue === 'object' && dataToSearchValue !== null) {
-        return Object.values(dataToSearchValue).filter((dataToSearchObjectValue) => {
-          return recursiveSearch(dataToSearchObjectValue, phrase);
-        }).length;
-      } else {
-        return recursiveSearch(dataToSearchValue, phrase);
-      }
-    }).length;
-    } else if (typeof dataToSearch === 'object' && dataToSearch !== null) {
-          return Object.values(dataToSearch).filter((val) => {
-            return recursiveSearch(val, phrase);
-      });
-    } else {
-      // return typeof dataToSearch === 'string' && dataToSearch.indexOf(phrase) > -1;
-      if (/[a-zA-Z ]/i.test(dataToSearch)) {
-        return dataToSearch.indexOf(phrase) > -1
-      } else if (/[0-9]/i.test(dataToSearch)) {
-        return dataToSearch.toString().indexOf(phrase) > -1;
-      } else {
-        return false;
-      }
-    }
-  }
-
-  result = mainDataArr.filter((dataOfArray) => {
-    const y = recursiveSearch(dataOfArray, phrase);
-    return y && y.length;
-  });
-  this.resultOfFilterWith = result;
-  return result;
-}
-
-//1. zrobić metodę recursiveSearch, iteruje po typie: obiekt, array, else string
-//2. programowanie funkcyjne - poszukać
 
 }

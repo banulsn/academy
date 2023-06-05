@@ -1,7 +1,7 @@
 
   const generatePesel = (userDate, gender) => {
     const date = new Date(userDate);
-    if (typeof date.getMonth !== 'function') {
+    if (date.toString() === 'Invalid Date') {
       console.log('Podana data nie jest poprawna');
       return;
     }
@@ -67,5 +67,5 @@
       return !(randomNumber % 2)
     }
   }
-  // https://sprawdz-numer.com/pesel
+  // https://sprawdz-numer.com/pesel - 1999/04/17
   console.log(generatePesel('1999/04/17', 'male'));
