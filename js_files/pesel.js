@@ -1,7 +1,7 @@
 
   const generatePesel = (userDate, gender) => {
     const date = new Date(userDate);
-    if (date.toString() === 'Invalid Date') {
+    if (date.toString === 'Invalid Date') {
       console.log('Podana data nie jest poprawna');
       return;
     }

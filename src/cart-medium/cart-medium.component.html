@@ -1,0 +1,17 @@
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <h4 class="mb-5">CART MEDIUM</h4>
+            <div class="mb-5 d-flex align-items-start">
+                <div class="w-75 ps-5">
+                    Dodaj produkt: <button (click)="addProduct()">Dodaj</button>
+                    Usuń produkt: <button (click)="removeProduct()">Usuń</button>
+                    Wartość po rabatach: <b>{{cart.totalPriceCountWithDiscount()|json}}</b>
+                    <code>
+                        <pre>{{cart | json}}</pre>
+                    </code>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
