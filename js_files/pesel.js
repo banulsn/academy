@@ -67,5 +67,5 @@
       return !(randomNumber % 2)
     }
   }
-  // https://sprawdz-numer.com/pesel - 1999/04/17
+  // https://sprawdz-numer.com/pesel
   console.log(generatePesel('1999/04/17', 'male'));
