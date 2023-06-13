@@ -8,6 +8,12 @@ export class CartItem {
 
   private static uuidBaseNumber = 0;
 
+  // Typescript => handbook
+  // UtilityTypes => Partial<CartItem> 
+  // <T> => typ generyczny 
+  // nie podawaj uuid w constructorze
+  // constructor(arg1, arg2, arg3...)
+  // type CartParams = {name, price}
   constructor(params: CartItem = {}) {
     this.uuid = params.uuid ? params.uuid : CartItem.uuidBaseNumber++;
     this.name = params.name ? params.name : 'Brak nazwy';
@@ -17,7 +23,7 @@ export class CartItem {
     this.priceAfterDiscount = params.priceAfterDiscount ? params.priceAfterDiscount : this.getPriceAfterDiscount();
   }
 
-  getPriceAfterDiscount?() {
+  getPriceAfterDiscount() {
     if (this.price > 0 && this.discount > 0) {
       return this.price - (this.price*(this.discount === 0 ? 100 : this.discount/100));
     } else return 0;
@@ -52,6 +58,7 @@ export class Cart {
   discount?: number;
   discountCode?: string;
 
+  // npm => uuid()
   private static uuidBaseNumber = 0;
 
   constructor(params: Cart = {}) {
