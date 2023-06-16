@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Cart, CartItem, Category } from "../../ts_files/cartMedium";
+import { Category } from 'ts_files/cart-category.model';
+import { Cart } from 'ts_files/cart.model';
 
 @Component({
   selector: 'cart-medium',
@@ -15,7 +16,7 @@ export class CartMediumComponent {
   }
 
   removeProduct() {
-    this.cart.removeProductFromoCart(2);
+    this.cart.removeProductFromoCart(this.cart.items[0].uuid);
   }
 
 }
