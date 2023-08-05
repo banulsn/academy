@@ -7,15 +7,15 @@ export class Cart {
   discount: number;
   discountCode: string;
 
-  constructor(items?, discount?, discountCode?) {
+  constructor(items?: CartItem[], discount?: number, discountCode?: string) {
     this.uuid = uuidv4();
     this.items = items ? items : [];
     this.discount = discount ? discount : 0;
     this.discountCode = discountCode ? discountCode : '';
   }
 
-  addProductToCart? = (product: Partial<CartItem>) => {
-    this.items.push(new CartItem(product.name, product.price, product.discount, product.category));
+  addProductToCart? = (product: {name: string, price: number, id: number} & Partial<CartItem>) => {
+    this.items.push(new CartItem(product.name, product.price, product.id, product.discount, product.category));
   }
 
   removeProductFromoCart? = (productUuid: string) => {
@@ -31,9 +31,10 @@ export class Cart {
     }, 0);
   }
 
-  // Ma mieć: uuid, listę wybranych przedmiotów, rabat % na koszyk, kod rabatowy
-  // Ma umożliwiać: 
-  // - dodawanie/usuwanie przedmiotów do/z koszyka
-  // - zmianę ilości produktu w koszyku
-  // - podliczać wartość koszyka uwzględniajac rabaty
+  totalPriceCartWithDiscount?() {
+    const totalPriceCountWithDiscount = this.totalPriceCountWithDiscount();
+    if (this.discount > 0 && this.items.length) {
+      return totalPriceCountWithDiscount - (totalPriceCountWithDiscount*this.discount/100);
+    } else return totalPriceCountWithDiscount;
+  }
 }
