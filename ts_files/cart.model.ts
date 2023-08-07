@@ -14,24 +14,24 @@ export class Cart {
     this.discountCode = discountCode ? discountCode : '';
   }
 
-  addProductToCart? = (product: {name: string, price: number, id: number} & Partial<CartItem>) => {
+  addProductToCart(product: {name: string, price: number, id: number} & Partial<CartItem>) {
     this.items.push(new CartItem(product.name, product.price, product.id, product.discount, product.category));
   }
 
-  removeProductFromoCart? = (productUuid: string) => {
+  removeProductFromoCart(productUuid: string) {
     const index = this.items.findIndex(item => item.uuid === productUuid);
     if (index > -1) {
       this.items.splice(index, 1);
     }
   }
 
-  totalPriceCountWithDiscount?() {
+  totalPriceCountWithDiscount() {
     return this.items.reduce((prev, cur) => {
       return prev + cur.priceAfterDiscount;
     }, 0);
   }
 
-  totalPriceCartWithDiscount?() {
+  totalPriceCartWithDiscount() {
     const totalPriceCountWithDiscount = this.totalPriceCountWithDiscount();
     if (this.discount > 0 && this.items.length) {
       return totalPriceCountWithDiscount - (totalPriceCountWithDiscount*this.discount/100);

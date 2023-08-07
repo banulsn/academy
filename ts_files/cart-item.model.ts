@@ -20,28 +20,28 @@ export class CartItem {
     this.priceAfterDiscount = this.getPriceAfterDiscount();
   }
 
-  getPriceAfterDiscount?() {
+  getPriceAfterDiscount() {
     if (this.price > 0) {
       return this.price - (this.price*this.discount/100);
     } else return this.price;
   }
 
-  setProductCategory?(category: Category) {
+  setProductCategory(category: Category) {
     this.category = category;
   }
 
-  setProductName?(name: string) {
+  setProductName(name: string) {
     this.name = name;
   }
 
-  setProductPrice?(price: number) {
+  setProductPrice(price: number) {
     this.price = price
   }
   
-  setProductDiscount?(discount: number) {
+  setProductDiscount(discount: number) {
     this.discount = discount
   }
-  setProductId?(id: number) {
+  setProductId(id: number) {
     this.id - id;
   }
 }

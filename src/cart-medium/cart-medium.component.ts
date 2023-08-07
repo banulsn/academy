@@ -12,7 +12,7 @@ export class CartMediumComponent {
   cart: Cart = new Cart();
 
   addProduct() {
-    this.cart.addProductToCart({name: 'chleb', category: Category.food, price: 50, discount: 2});
+    this.cart.addProductToCart({name: 'chleb', category: Category.food, price: 50, discount: 2, id: 1});
   }
 
   removeProduct() {
